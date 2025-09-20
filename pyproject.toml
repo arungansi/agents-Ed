@@ -9,7 +9,7 @@ dependencies = [
     "autogen-agentchat>=0.4.9.2",
     "autogen-ext[grpc,mcp,ollama,openai]>=0.4.9.2",
     "bs4>=0.0.2",
-    "gradio>=5.22.0",
+    "gradio[cli]>=5.22.0",
     "httpx>=0.28.1",
     "ipywidgets>=8.1.5",
     "langchain-anthropic>=0.3.10",
@@ -42,5 +42,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "gradio>=5.34.2",
     "ipykernel>=6.29.5",
 ]

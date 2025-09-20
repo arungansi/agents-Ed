@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.13'",
@@ -49,6 +49,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "gradio" },
     { name = "ipykernel" },
 ]
 
@@ -58,7 +59,7 @@ requires-dist = [
     { name = "autogen-agentchat", specifier = ">=0.4.9.2" },
     { name = "autogen-ext", extras = ["grpc", "mcp", "ollama", "openai"], specifier = ">=0.4.9.2" },
     { name = "bs4", specifier = ">=0.0.2" },
-    { name = "gradio", specifier = ">=5.22.0" },
+    { name = "gradio", extras = ["cli"], specifier = ">=5.22.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "ipywidgets", specifier = ">=8.1.5" },
     { name = "langchain-anthropic", specifier = ">=0.3.10" },
@@ -90,7 +91,10 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "ipykernel", specifier = ">=6.29.5" }]
+dev = [
+    { name = "gradio", specifier = ">=5.34.2" },
+    { name = "ipykernel", specifier = ">=6.29.5" },
+]
 
 [[package]]
 name = "aiofiles"

@@ -7,8 +7,6 @@ from pypdf import PdfReader
 import gradio as gr
 
 
-load_dotenv(override=True)
-
 def push(text):
     requests.post(
         "https://api.pushover.net/1/messages.json",
@@ -76,9 +74,13 @@ tools = [{"type": "function", "function": record_user_details_json},
 class Me:
 
     def __init__(self):
-        self.openai = OpenAI()
-        self.name = "Ed Donner"
-        reader = PdfReader("me/linkedin.pdf")
+        load_dotenv(override=True)
+        google_api_key = os.getenv('GOOGLE_API_KEY')
+        self.openai = OpenAI(api_key=google_api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+        self.model_name = "gemini-2.0-flash"
+        
+        self.name = "Arun Ganesan"
+        reader = PdfReader("me/ArunG-Profile.pdf")
         self.linkedin = ""
         for page in reader.pages:
             text = page.extract_text()
@@ -116,7 +118,7 @@ If the user is engaging in discussion, try to steer them towards getting in touc
         messages = [{"role": "system", "content": self.system_prompt()}] + history + [{"role": "user", "content": message}]
         done = False
         while not done:
-            response = self.openai.chat.completions.create(model="gpt-4o-mini", messages=messages, tools=tools)
+            response = self.openai.chat.completions.create(model=self.model_name, messages=messages, tools=tools)
             if response.choices[0].finish_reason=="tool_calls":
                 message = response.choices[0].message
                 tool_calls = message.tool_calls
